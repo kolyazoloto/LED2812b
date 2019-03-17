@@ -146,7 +146,22 @@ class LED_Strip{
 			left_sdwig();
 		}
 	}
-	
+	void color_single(int number,int r,int g,int b){
+		for(int i=0;i<3;i++){
+			switch (i)
+			{
+			case 0:
+				temp[number-1][i] = g;
+				break;
+			case 1:
+				temp[number-1][i] = r;
+				break;
+			case 2:
+				temp[number-1][i] = b;
+				break;
+			}
+		}
+	}
 	
 
 	private:
@@ -199,14 +214,13 @@ class LED_Strip{
 
 
 int main(void){
-	LED_Strip strip(118);
-	strip.LED_grad(0,0,0,0,0,255);
+	LED_Strip strip(20); //118
+	strip.LED_color(0,0,0);
+	strip.color_single(3,0,0,255);
+
+	strip.LED_Write();
 	while (1){
-		strip.LED_Write();
-		//strip.LED_rand();
-		//strip.LED_color(rand()%256,rand()%256,rand()%256);
-		//strip.LED_Write();
-		//_delay_ms(1000);
+
 	}
 	
 }
