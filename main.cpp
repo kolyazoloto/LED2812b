@@ -13,7 +13,7 @@ class LED_Strip{
 	LED_Strip(int length){
 		DDRB |= (1<<PB0);
 		strip_length=length;
-		temp = (int**)malloc(strip_length*sizeof(int*)); //Âûäåëåíèå ïàìÿòè ïîä êàñòûëü
+		temp = (int**)malloc(strip_length*sizeof(int*)); //sozdaem massive
 		for(unsigned char i=0;i<strip_length;i++){
 			temp[i] = (int*)malloc(3*sizeof(int));
 		}
@@ -21,7 +21,7 @@ class LED_Strip{
 	void LED_color(unsigned char red,unsigned char green,unsigned char blue)
 	{
 		unsigned char led_on[3] = {green,red,blue};
-		unsigned char j,i;	//i-äëèíà ýôôåêòà, k-ñ÷åò÷èê äëèíû âðåìåííîãî ìàññèâà
+		unsigned char j,i;	//zapolnyaem massive
 		for (i=0; i<strip_length; i++){
 			for (j=0;j<3;j++)
 			{
@@ -39,7 +39,7 @@ class LED_Strip{
 		for (int i=0; i<strip_length; i++){
 			for (int j=0;j<3;j++)
 			{
-				temp[i][j]=first_color[j]-mean[j]*i;//çàäâèãàåì âî âðåìåííûé ìàññèâ
+				temp[i][j]=first_color[j]-mean[j]*i;//na kajdii shag izmenyaem cvet
 			}
 		}
 	}
@@ -94,7 +94,7 @@ class LED_Strip{
 				_delay_ms(100);
 				for (int i=0; i<100; i++){
 					for (int j=0;j<3;j++){
-						temp[i][j] -= sign * mean[j];//çàäâèãàåì âî âðåìåííûé ìàññèâ
+						temp[i][j] -= sign * mean[j];
 					}
 				}
 				LED_Write();
@@ -110,8 +110,8 @@ class LED_Strip{
 		{
 			for (j=0; j<3; j++)			//ïåðâûì âûñòàâëÿåòñÿ G (Hi->Low), ïîòîì R è B
 			{
-				a = 0x80;				//ñðàâíèâàåì êàæäûé áèò
-				for (i=0;i<8;i++)			//ïåðåäà÷à 8 áèò öâåòà èç ïîäãîòîâëåííîãî ìàññèâà temp
+				a = 0x80;				//10000000
+				for (i=0;i<8;i++)			//8 bit ishem edidnicu ili nol
 				{
 					if ((temp[n][j]&a)==0)
 					{
